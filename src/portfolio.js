@@ -29,7 +29,6 @@ const greeting = {
 };
 
 const socialMediaLinks = [
-
   {
     name: "Github",
     link: "https://github.com/aaftab22",
@@ -86,7 +85,7 @@ const skills = {
           style: {
             backgroundColor: "transparent",
           },
-        }, 
+        },
         {
           skillName: "JAVA",
           fontAwesomeClassname: "logos-java",
@@ -127,7 +126,7 @@ const skills = {
             color: "#E34F26",
           },
         },
-        
+
         {
           skillName: "CSS3",
           fontAwesomeClassname: "fa-css3",
@@ -157,7 +156,6 @@ const skills = {
             color: "#339933",
           },
         },
-        
       ],
     },
     {
@@ -191,7 +189,7 @@ const skills = {
             color: "#FFCA28",
           },
         },
-    
+
         {
           skillName: "MongoDB",
           fontAwesomeClassname: "logos-mongodb",
@@ -323,7 +321,7 @@ const degrees = {
         "⚡ Developed a final year project, 'Rental Hub': a user-friendly Android rental platform app using Java, Firebase, and REST API, incorporating user authentication, item listings, and profile management.",
       ],
       website_link: "https://www.gujaratuniversity.ac.in",
-    }
+    },
   ],
 };
 
@@ -419,7 +417,7 @@ const certifications = {
     //   alt_name: "Coursera",
     //   color_code: "#2A73CC",
     // },
-   
+
     {
       title: "Cloud Architecture",
       subtitle: "- Qwiklabs",
@@ -603,7 +601,7 @@ const projectsHeader = {
 };
 
 const publicationsHeader = {
-  title: "Publications",
+  title: "Achievements",
   description: "Some of my published Articles, Blogs and Research.",
   avatar_image_path: "projects_image.svg",
 };
@@ -611,26 +609,27 @@ const publicationsHeader = {
 const publications = {
   data: [
     {
-      id: "neuro-symbolic-sudoku-solver",
-      name: "Neuro-Symbolic Sudoku Solver",
-      createdAt: "2023-07-02T00:00:00Z",
-      description: "Paper published in KDD KiML 2023",
-      url: "https://arxiv.org/abs/2307.00653",
+      id: "LJTians Blog",
+      name: "Ljtians Blog",
+      createdAt: "December 2020",
+      description:
+        "Created for classmates to share important content while doing my Bachelors Degree",
+      url: "https://ljtians.blogspot.com",
     },
     {
-      id: "mdp-diffusion",
-      name: "MDP-Diffusion",
-      createdAt: "2023-09-19T00:00:00Z",
-      description: "Blog published in Paperspace",
-      url: "https://blog.paperspace.com/mdp-diffusion/",
+      id: "Royal-Ghanchi Blog",
+      name: "Royal-Ghanchi Blog",
+      createdAt: "March 2021",
+      description: "Created to download the youtube video of my own channel",
+      url: "https://royalghanchi.blogspot.com",
     },
-    {
-      id: "consistency-models",
-      name: "Consistency Models",
-      createdAt: "2023-10-12T00:00:00Z",
-      description: "Blog published in Paperspace",
-      url: "https://blog.paperspace.com/consistency-models/",
-    },
+    // {
+    //   id: "consistency-models",
+    //   name: "Consistency Models",
+    //   createdAt: "2023-10-12T00:00:00Z",
+    //   description: "Blog published in Paperspace",
+    //   url: "https://blog.paperspace.com/consistency-models/",
+    // },
   ],
 };
 
