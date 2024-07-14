@@ -256,32 +256,6 @@
       }
     },
     {
-      "id": "I_kwDOG0_8uc5EdHXm",
-      "closed": true,
-      "title": "FavIcon not showing in the deployed website",
-      "createdAt": "2022-02-23T19:19:45Z",
-      "url": "https://github.com/ashutosh1919/react-awesome-shapes/issues/33",
-      "number": 33,
-      "assignees": {
-        "nodes": [
-          {
-            "avatarUrl": "https://avatars.githubusercontent.com/u/20843596?u=6deb5872cde2e3ab5bf5d48ece503bc8b5b0bcf6&v=4",
-            "name": "Ashutosh Hathidara",
-            "url": "https://github.com/ashutosh1919"
-          }
-        ]
-      },
-      "repository": {
-        "name": "react-awesome-shapes",
-        "url": "https://github.com/ashutosh1919/react-awesome-shapes",
-        "owner": {
-          "login": "ashutosh1919",
-          "avatarUrl": "https://avatars.githubusercontent.com/u/20843596?u=6deb5872cde2e3ab5bf5d48ece503bc8b5b0bcf6&v=4",
-          "url": "https://github.com/ashutosh1919"
-        }
-      }
-    },
-    {
       "id": "I_kwDOG0_8uc5EdADi",
       "closed": true,
       "title": "Remove react from peer dependencies without crash",
