@@ -11,7 +11,7 @@ const seo = {
   og: {
     title: "Aaftab Vhora Portfolio",
     type: "website",
-    url: "http://aaftab.me/",
+    url: "http://aaftab.tech/",
   },
 };
 
