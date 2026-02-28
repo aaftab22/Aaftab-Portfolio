@@ -257,7 +257,7 @@ const competitiveSites = {
       style: {
         color: "#F79F1B",
       },
-      profileLink: "https://leetcode.com/layman_brother/",
+      profileLink: "https://leetcode.com/aaftab22/",
     },
     {
       siteName: "HackerRank",
@@ -265,7 +265,7 @@ const competitiveSites = {
       style: {
         color: "#2EC866",
       },
-      profileLink: "https://www.hackerrank.com/layman_brother",
+      profileLink: "https://www.hackerrank.com/aaftab22",
     },
     {
       siteName: "Codechef",
@@ -273,7 +273,7 @@ const competitiveSites = {
       style: {
         color: "#5B4638",
       },
-      profileLink: "https://www.codechef.com/users/Aaftab22",
+      profileLink: "https://www.codechef.com/users/aaftab22",
     },
   ],
 };
