@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Aaftab Vhora — Developer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root[data-theme="dark"] {
+      --bg: #0d0d0f; --bg2: #141416; --bg3: #1c1c1f;
+      --border: rgba(255,255,255,0.07); --text: #f0f0f0; --text2: #9a9aaa;
+      --accent: #00d4aa; --accent2: #00b894; --card: #161618;
+      --shadow: rgba(0,0,0,0.5); --tag-bg: rgba(0,212,170,0.1);
+      --tag-color: #00d4aa; --nav-bg: rgba(13,13,15,0.85);
+    }
+    :root[data-theme="light"] {
+      --bg: #f5f5f7; --bg2: #ffffff; --bg3: #ebebef;
+      --border: rgba(0,0,0,0.08); --text: #111114; --text2: #6b6b7a;
+      --accent: #0066cc; --accent2: #0052a3; --card: #ffffff;
+      --shadow: rgba(0,0,0,0.1); --tag-bg: rgba(0,102,204,0.08);
+      --tag-color: #0066cc; --nav-bg: rgba(245,245,247,0.85);
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; transition: background 0.3s, color 0.3s; overflow-x: hidden; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: var(--nav-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border); padding: 0 5%; height: 64px;
+      display: flex; align-items: center; justify-content: space-between; transition: background 0.3s;
+    }
+    .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.25rem; color: var(--accent); text-decoration: none; }
+    .nav-links { display: flex; gap: 2rem; align-items: center; list-style: none; }
+    .nav-links a { font-size: 0.875rem; font-weight: 500; color: var(--text2); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+    .theme-toggle { background: var(--bg3); border: 1px solid var(--border); border-radius: 20px; padding: 6px 14px; cursor: pointer; font-size: 0.8rem; font-weight: 500; color: var(--text2); transition: all 0.2s; display: flex; align-items: center; gap: 6px; }
+    .theme-toggle:hover { color: var(--text); border-color: var(--accent); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; }
+
+    section { padding: 100px 5%; max-width: 1100px; margin: 0 auto; }
+
+    #hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; max-width: 100%; padding: 140px 8% 80px; position: relative; overflow: hidden; }
+    .hero-eyebrow { font-size: 0.85rem; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; opacity: 0; animation: fadeUp 0.6s 0.1s forwards; }
+    .hero-name { font-family: 'Syne', sans-serif; font-size: clamp(3rem, 8vw, 6.5rem); font-weight: 800; line-height: 1; letter-spacing: -2px; color: var(--text); opacity: 0; animation: fadeUp 0.6s 0.2s forwards; }
+    .hero-title { font-family: 'Syne', sans-serif; font-size: clamp(1.2rem, 3vw, 2rem); font-weight: 600; color: var(--text2); margin-top: 0.5rem; opacity: 0; animation: fadeUp 0.6s 0.3s forwards; }
+    .hero-desc { max-width: 560px; color: var(--text2); font-size: 1.05rem; margin-top: 1.5rem; font-weight: 300; opacity: 0; animation: fadeUp 0.6s 0.4s forwards; }
+    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2.5rem; opacity: 0; animation: fadeUp 0.6s 0.5s forwards; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 500; text-decoration: none; transition: all 0.2s; cursor: pointer; border: none; }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { background: var(--accent2); transform: translateY(-2px); }
+    .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text); }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+    .hero-links { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-top: 3rem; opacity: 0; animation: fadeUp 0.6s 0.6s forwards; }
+    .hero-link { font-size: 0.85rem; color: var(--text2); text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
+    .hero-link:hover { color: var(--accent); }
+    .hero-bg-text { position: absolute; right: -2%; top: 50%; transform: translateY(-50%); font-family: 'Syne', sans-serif; font-size: clamp(8rem, 18vw, 18rem); font-weight: 800; color: var(--border); pointer-events: none; user-select: none; z-index: 0; line-height: 1; }
+
+    .section-label { font-size: 0.78rem; font-weight: 500; letter-spacing: 2.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; }
+    .section-title { font-family: 'Syne', sans-serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; letter-spacing: -1px; margin-bottom: 3rem; color: var(--text); }
+
+    #about .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .about-text p { color: var(--text2); font-size: 1.05rem; font-weight: 300; line-height: 1.8; margin-bottom: 1rem; }
+    .about-text p strong { color: var(--text); font-weight: 500; }
+    .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .stat-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; text-align: center; }
+    .stat-num { font-family: 'Syne', sans-serif; font-size: 2.2rem; font-weight: 800; color: var(--accent); line-height: 1; }
+    .stat-label { font-size: 0.8rem; color: var(--text2); margin-top: 0.4rem; }
+
+    #skills { background: var(--bg2); padding: 100px 8%; max-width: 100%; }
+    #skills .inner { max-width: 1100px; margin: 0 auto; }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+    .skill-group { background: var(--bg3); border: 1px solid var(--border); border-radius: 14px; padding: 1.75rem; }
+    .skill-group-title { font-family: 'Syne', sans-serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .skill-tag { background: var(--tag-bg); color: var(--tag-color); padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 500; }
+
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before { content: ''; position: absolute; left: 0; top: 8px; bottom: 0; width: 1px; background: var(--border); }
+    .timeline-item { position: relative; margin-bottom: 3rem; padding-bottom: 3rem; border-bottom: 1px solid var(--border); }
+    .timeline-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .timeline-dot { position: absolute; left: -2.45rem; top: 6px; width: 14px; height: 14px; border-radius: 50%; background: var(--accent); border: 3px solid var(--bg); }
+    .tl-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.25rem; }
+    .tl-role { font-family: 'Syne', sans-serif; font-size: 1.15rem; font-weight: 700; color: var(--text); }
+    .tl-date { font-size: 0.8rem; color: var(--accent); font-weight: 500; background: var(--tag-bg); padding: 4px 10px; border-radius: 20px; white-space: nowrap; }
+    .tl-company { font-size: 0.9rem; color: var(--text2); margin-bottom: 1rem; }
+    .tl-bullets { list-style: none; }
+    .tl-bullets li { color: var(--text2); font-size: 0.9rem; font-weight: 300; line-height: 1.7; padding-left: 1.2rem; position: relative; margin-bottom: 0.4rem; }
+    .tl-bullets li::before { content: '->'; position: absolute; left: 0; color: var(--accent); font-size: 0.75rem; }
+
+    #projects { background: var(--bg2); padding: 100px 8%; max-width: 100%; }
+    #projects .inner { max-width: 1100px; margin: 0 auto; }
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 1.5rem; }
+    .project-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s; position: relative; }
+    .project-card::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
+    .project-card:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: 0 12px 40px var(--shadow); }
+    .project-card:hover::after { transform: scaleX(1); }
+    .project-img { width: 100%; height: 175px; overflow: hidden; background: var(--bg3); }
+    .project-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s; }
+    .project-card:hover .project-img img { transform: scale(1.05); }
+    .project-body { padding: 1.5rem; }
+    .project-num { font-family: 'Syne', sans-serif; font-size: 0.72rem; font-weight: 700; color: var(--accent); letter-spacing: 1px; margin-bottom: 0.4rem; opacity: 0.6; }
+    .project-name { font-family: 'Syne', sans-serif; font-size: 1.15rem; font-weight: 700; color: var(--text); margin-bottom: 0.6rem; }
+    .project-desc { color: var(--text2); font-size: 0.875rem; font-weight: 300; line-height: 1.7; margin-bottom: 1rem; }
+    .project-tech { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1rem; }
+    .tech-tag { background: var(--tag-bg); color: var(--tag-color); padding: 3px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 500; }
+    .project-links { display: flex; gap: 1rem; }
+    .project-link { font-size: 0.8rem; font-weight: 500; color: var(--text2); text-decoration: none; display: flex; align-items: center; gap: 5px; transition: color 0.2s; }
+    .project-link:hover { color: var(--accent); }
+
+    .edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 1.5rem; }
+    .edu-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 1.75rem; transition: border-color 0.2s; }
+    .edu-card:hover { border-color: var(--accent); }
+    .edu-degree { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 0.4rem; }
+    .edu-school { font-size: 0.875rem; color: var(--accent); font-weight: 500; margin-bottom: 0.3rem; }
+    .edu-meta { font-size: 0.8rem; color: var(--text2); font-weight: 300; }
+    .edu-gpa { font-size: 0.82rem; color: var(--text2); margin-top: 0.6rem; }
+    .edu-gpa span { color: var(--accent); font-weight: 600; }
+
+    #contact { background: var(--bg2); padding: 100px 8%; max-width: 100%; }
+    #contact .inner { max-width: 1100px; margin: 0 auto; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .contact-text p { color: var(--text2); font-weight: 300; line-height: 1.8; margin-bottom: 2rem; }
+    .contact-items { display: flex; flex-direction: column; gap: 1rem; }
+    .contact-item { display: flex; align-items: center; gap: 1rem; color: var(--text2); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+    .contact-item:hover { color: var(--accent); }
+    .contact-icon { width: 40px; height: 40px; background: var(--tag-bg); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+    .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-group label { font-size: 0.8rem; font-weight: 500; color: var(--text2); }
+    .form-group input, .form-group textarea { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 12px 16px; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; color: var(--text); transition: border-color 0.2s; resize: none; }
+    .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--accent); }
+    .form-group textarea { min-height: 120px; }
+
+    footer { text-align: center; padding: 2rem; font-size: 0.8rem; color: var(--text2); border-top: 1px solid var(--border); }
+    footer span { color: var(--accent); }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.5s, transform 0.5s; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0; background: var(--bg2); padding: 1.5rem 5%; border-bottom: 1px solid var(--border); gap: 1.25rem; }
+      .nav-links.open { display: flex; }
+      .hamburger { display: flex; }
+      #hero { padding: 120px 5% 60px; }
+      .hero-bg-text { display: none; }
+      #about .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .about-stats { grid-template-columns: 1fr 1fr; }
+      section, #skills, #contact, #projects { padding: 70px 5%; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="#hero" class="nav-logo">AV</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:1rem;">
+    <button class="theme-toggle" onclick="toggleTheme()">
+      <span id="themeIcon">&#9728;</span><span id="themeLabel">Light</span>
+    </button>
+    <button class="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="hero-bg-text">DEV</div>
+  <p class="hero-eyebrow">Available for opportunities</p>
+  <h1 class="hero-name">Aaftab<br>Vhora</h1>
+  <p class="hero-title">Full Stack &amp; Mobile Developer</p>
+  <p class="hero-desc">Building performant web and mobile applications — from REST APIs and relational databases to cross-platform UIs.</p>
+  <div class="hero-cta">
+    <a href="#projects" class="btn btn-primary">View My Work</a>
+    <a href="#contact" class="btn btn-outline">Get In Touch</a>
+  </div>
+  <div class="hero-links">
+    <a href="https://github.com/aaftab22" target="_blank" class="hero-link">
+      <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+      GitHub
+    </a>
+    <a href="https://aaftab.tech" target="_blank" class="hero-link">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      aaftab.tech
+    </a>
+    <a href="mailto:aaftabvhora62@gmail.com" class="hero-link">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      aaftabvhora62@gmail.com
+    </a>
+  </div>
+</section>
+
+<section id="about">
+  <p class="section-label fade-in">Get to know me</p>
+  <h2 class="section-title fade-in">About Me</h2>
+  <div class="about-grid">
+    <div class="about-text fade-in">
+      <p>I'm a <strong>Software Developer</strong> based in Toronto, ON, experienced in building full-stack web and mobile applications. I specialize in creating seamless, performant experiences from database to device.</p>
+      <p>My stack spans <strong>React, Next.js, TypeScript, Node.js</strong> on the web side and <strong>React Native, Java, Kotlin</strong> for mobile — making me comfortable across both worlds.</p>
+      <p>I enjoy solving real-world problems through clean code, thoughtful architecture, and an eye for detail. I've worked in fast-paced Agile environments and as an independent contractor on Upwork.</p>
+    </div>
+    <div class="about-stats fade-in">
+      <div class="stat-card"><div class="stat-num">3+</div><div class="stat-label">Years of Experience</div></div>
+      <div class="stat-card"><div class="stat-num">5+</div><div class="stat-label">Projects Shipped</div></div>
+      <div class="stat-card"><div class="stat-num">2</div><div class="stat-label">Web + Mobile</div></div>
+      <div class="stat-card"><div class="stat-num">&#8734;</div><div class="stat-label">Problems to Solve</div></div>
+    </div>
+  </div>
+</section>
+
+<div id="skills">
+  <div class="inner">
+    <p class="section-label fade-in">What I work with</p>
+    <h2 class="section-title fade-in">Technical Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-group fade-in"><div class="skill-group-title">Languages</div><div class="skill-tags"><span class="skill-tag">JavaScript</span><span class="skill-tag">TypeScript</span><span class="skill-tag">Java</span><span class="skill-tag">Kotlin</span></div></div>
+      <div class="skill-group fade-in"><div class="skill-group-title">Frontend &amp; Mobile</div><div class="skill-tags"><span class="skill-tag">React</span><span class="skill-tag">Next.js</span><span class="skill-tag">Vue.js</span><span class="skill-tag">React Native</span></div></div>
+      <div class="skill-group fade-in"><div class="skill-group-title">Backend</div><div class="skill-tags"><span class="skill-tag">Node.js</span><span class="skill-tag">Express</span><span class="skill-tag">REST APIs</span></div></div>
+      <div class="skill-group fade-in"><div class="skill-group-title">Databases</div><div class="skill-tags"><span class="skill-tag">PostgreSQL</span><span class="skill-tag">MySQL</span><span class="skill-tag">MongoDB</span><span class="skill-tag">Firebase</span></div></div>
+      <div class="skill-group fade-in"><div class="skill-group-title">Cloud &amp; DevOps</div><div class="skill-tags"><span class="skill-tag">AWS EC2</span><span class="skill-tag">AWS Amplify</span><span class="skill-tag">Firebase</span><span class="skill-tag">Nginx</span><span class="skill-tag">PM2</span></div></div>
+      <div class="skill-group fade-in"><div class="skill-group-title">Tools</div><div class="skill-tags"><span class="skill-tag">Git</span><span class="skill-tag">GitHub</span><span class="skill-tag">Prisma</span><span class="skill-tag">Stripe</span><span class="skill-tag">Sanity CMS</span></div></div>
+    </div>
+  </div>
+</div>
+
+<section id="experience">
+  <p class="section-label fade-in">Where I've worked</p>
+  <h2 class="section-title fade-in">Experience</h2>
+  <div class="timeline">
+    <div class="timeline-item fade-in">
+      <div class="timeline-dot"></div>
+      <div class="tl-header"><div class="tl-role">Full Stack Developer</div><div class="tl-date">Sept 2024 – Dec 2024</div></div>
+      <div class="tl-company">Caliber Group Ltd · Toronto, ON</div>
+      <ul class="tl-bullets">
+        <li>Developed and maintained features for an internal Admin Dashboard using React and Node.js.</li>
+        <li>Designed and consumed RESTful APIs to synchronize data between the dashboard and mobile application.</li>
+        <li>Implemented authentication flows and role-based access control for different user types.</li>
+        <li>Debugged and resolved frontend and backend issues reported during testing and client review cycles.</li>
+        <li>Collaborated in Agile sprints, including requirement discussions, task breakdown, and code reviews.</li>
+      </ul>
+    </div>
+    <div class="timeline-item fade-in">
+      <div class="timeline-dot"></div>
+      <div class="tl-header"><div class="tl-role">Full Stack Developer</div><div class="tl-date">Aug 2024 – Present</div></div>
+      <div class="tl-company">Upwork · Remote (Freelance)</div>
+      <ul class="tl-bullets">
+        <li>Built responsive web and mobile applications using React, React Native, TypeScript, Java, and Kotlin.</li>
+        <li>Structured applications using modular architecture patterns to improve maintainability.</li>
+        <li>Contributed to AI-related projects involving data validation, API integration, and workflow automation.</li>
+        <li>Integrated third-party APIs and backend services to support real-time data updates.</li>
+        <li>Managed version control and collaboration using Git and GitHub.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div id="projects">
+  <div class="inner">
+    <p class="section-label fade-in">Things I've built</p>
+    <h2 class="section-title fade-in">Selected Projects</h2>
+    <div class="projects-grid">
+      <div class="project-card fade-in">
+        <div class="project-img"><img src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=600&q=80" alt="Resume Builder" loading="lazy"/></div>
+        <div class="project-body">
+          <div class="project-num">01</div>
+          <div class="project-name">I Love Resumes</div>
+          <div class="project-desc">A resume generation web app with dynamic form handling, live preview rendering, and AI-generated content. Supports PDF and DOCX export with Firebase Firestore for structured data storage.</div>
+          <div class="project-tech"><span class="tech-tag">TypeScript</span><span class="tech-tag">React</span><span class="tech-tag">Firebase</span><span class="tech-tag">OpenAI API</span></div>
+          <div class="project-links">
+            <a href="#" class="project-link"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Live Demo</a>
+          </div>
+        </div>
+      </div>
+      <div class="project-card fade-in">
+        <div class="project-img"><img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=80" alt="E-commerce" loading="lazy"/></div>
+        <div class="project-body">
+          <div class="project-num">02</div>
+          <div class="project-name">ResinArt Marketplace</div>
+          <div class="project-desc">Production-ready e-commerce platform with SSR, Stripe payments, transactional order workflows, and Sanity CMS for product management. Role-based auth for admin and customers.</div>
+          <div class="project-tech"><span class="tech-tag">Next.js 14</span><span class="tech-tag">PostgreSQL</span><span class="tech-tag">Prisma</span><span class="tech-tag">Sanity</span><span class="tech-tag">Stripe</span></div>
+          <div class="project-links">
+            <a href="#" class="project-link"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Live Demo</a>
+          </div>
+        </div>
+      </div>
+      <div class="project-card fade-in">
+        <div class="project-img"><img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&q=80" alt="Service Marketplace" loading="lazy"/></div>
+        <div class="project-body">
+          <div class="project-num">03</div>
+          <div class="project-name">OnDemandService</div>
+          <div class="project-desc">A service marketplace with role-based routing, provider registration, and booking management. Deployed on AWS EC2 with Nginx reverse proxy, HTTPS via Certbot, and PM2 process management.</div>
+          <div class="project-tech"><span class="tech-tag">React</span><span class="tech-tag">Node.js</span><span class="tech-tag">Firebase</span><span class="tech-tag">AWS EC2</span><span class="tech-tag">Nginx</span></div>
+          <div class="project-links">
+            <a href="#" class="project-link"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Live Demo</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="education">
+  <p class="section-label fade-in">My background</p>
+  <h2 class="section-title fade-in">Education</h2>
+  <div class="edu-grid">
+    <div class="edu-card fade-in">
+      <div class="edu-degree">Mobile Application Development</div>
+      <div class="edu-school">George Brown College</div>
+      <div class="edu-meta">Toronto, ON · Jan 2024 – Dec 2024</div>
+      <div class="edu-gpa">GPA: <span>3.9 / 4.0</span></div>
+    </div>
+    <div class="edu-card fade-in">
+      <div class="edu-degree">Computer Application Development</div>
+      <div class="edu-school">Conestoga College</div>
+      <div class="edu-meta">Waterloo, ON · Jan 2023 – Aug 2023</div>
+      <div class="edu-gpa">GPA: <span>3.65 / 4.0</span></div>
+    </div>
+    <div class="edu-card fade-in">
+      <div class="edu-degree">Bachelor of Computer Application</div>
+      <div class="edu-school">Gujarat University</div>
+      <div class="edu-meta">Gujarat, India · June 2019 – May 2022</div>
+      <div class="edu-gpa">GPA: <span>8.07 / 10</span></div>
+    </div>
+  </div>
+</section>
+
+<div id="contact">
+  <div class="inner">
+    <p class="section-label fade-in">Let's connect</p>
+    <h2 class="section-title fade-in">Get In Touch</h2>
+    <div class="contact-grid">
+      <div class="contact-text fade-in">
+        <p>I'm currently open to full-time opportunities and freelance projects. Whether you have a project in mind or just want to say hi — my inbox is always open.</p>
+        <div class="contact-items">
+          <a href="mailto:aaftabvhora62@gmail.com" class="contact-item">
+            <div class="contact-icon">&#128231;</div>
+            <div><div style="font-weight:500;color:var(--text);font-size:0.875rem;">Email</div><div>aaftabvhora62@gmail.com</div></div>
+          </a>
+          <a href="tel:+12268996843" class="contact-item">
+            <div class="contact-icon">&#128241;</div>
+            <div><div style="font-weight:500;color:var(--text);font-size:0.875rem;">Phone</div><div>+1 226 899 6843</div></div>
+          </a>
+          <a href="https://github.com/aaftab22" target="_blank" class="contact-item">
+            <div class="contact-icon">&#128187;</div>
+            <div><div style="font-weight:500;color:var(--text);font-size:0.875rem;">GitHub</div><div>github.com/aaftab22</div></div>
+          </a>
+          <a href="https://aaftab.tech" target="_blank" class="contact-item">
+            <div class="contact-icon">&#127760;</div>
+            <div><div style="font-weight:500;color:var(--text);font-size:0.875rem;">Website</div><div>aaftab.tech</div></div>
+          </a>
+        </div>
+      </div>
+      <div class="contact-form fade-in">
+        <div class="form-group"><label>Your Name</label><input type="text" placeholder="John Doe"/></div>
+        <div class="form-group"><label>Email</label><input type="email" placeholder="john@example.com"/></div>
+        <div class="form-group"><label>Message</label><textarea placeholder="Tell me about your project..."></textarea></div>
+        <button class="btn btn-primary" onclick="handleContact(this)" style="width:fit-content;">Send Message &#8594;</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer><p>Designed &amp; built by <span>Aaftab Vhora</span> · 2025</p></footer>
+
+<script>
+  function toggleTheme() {
+    const html = document.documentElement;
+    const dark = html.getAttribute('data-theme') === 'dark';
+    html.setAttribute('data-theme', dark ? 'light' : 'dark');
+    document.getElementById('themeIcon').innerHTML = dark ? '&#9789;' : '&#9728;';
+    document.getElementById('themeLabel').textContent = dark ? 'Dark' : 'Light';
+  }
+  function toggleMenu() { document.getElementById('navLinks').classList.toggle('open'); }
+  document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open')));
+  const obs = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+  function handleContact(btn) {
+    btn.textContent = 'Sent! \u2713';
+    btn.style.background = '#00b894';
+    setTimeout(() => { btn.textContent = 'Send Message \u2192'; btn.style.background = ''; }, 3000);
+  }
+</script>
+</body>
+</html>
